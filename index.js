@@ -318,7 +318,7 @@ function createWindow() {
     win.loadFile('./view/index.html');
 
     // DEBUG
-    win.webContents.openDevTools();
+    // win.webContents.openDevTools();
 
     connection.init(() => {
         console.log('connected');
