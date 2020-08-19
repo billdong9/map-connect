@@ -1,0 +1,46 @@
+@font-face {
+    font-family: "Open Sans";
+    src: url('../fonts/Open-Sans.ttf');
+}
+
+@font-face {
+    font-family: "Roboto Condensed";
+    src: url('../fonts/Roboto-Condensed.ttf');
+}
+
+html, body {
+    height: 100%;
+    width: 100%;
+}
+
+body {
+    padding: 0 10px;
+    padding-bottom: 10px;
+    box-sizing: border-box;
+    margin: 0;
+    background: black;
+    color: white;
+    font-family: 'Open Sans';
+}
+
+h1, h2, h3, h4 {
+    color: #f8c023;
+    font-family: 'Roboto Condensed';
+}
+
+#menu-main {
+    margin: auto;
+    text-align: center;
+}
+
+#connection-status {
+    font-size: 27px;
+}
+
+.joysticks-heading {
+    color: #f8c023;
+}
+
+.axesOrBtnLi {
+    cursor: pointer;
+}
