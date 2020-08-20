@@ -6,7 +6,7 @@
     "scripts": {
         "start": "electron index.js",
         "buildDarwin": "electron-packager ./ \"Map Connect\" --platform=darwin --out ./build --overwrite --icon=./img/logo.icns",
-        "buildWin": "electron-packager ./ \"Map Flight\" --platform=win32 --out ./build --overwrite --icon=./img/logo.ico",
+        "buildWin": "electron-packager ./ \"Map Connect\" --platform=win32 --out ./build --overwrite --icon=./img/logo.ico",
         "test": "echo \"Error: no test specified\" && exit 1"
     },
     "author": "",
