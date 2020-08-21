@@ -106,6 +106,8 @@
             const joysticksConfig = JSON.parse(JSON.stringify(require('electron').remote.getGlobal('joysticksConfig')));
             for (let i in joysticksConfig) {
                 if (joysticksConfig[i].index === gamepad.id) {
+                    if (!document.querySelector('#sel-' + i) || window.controls[i]) continue;
+
                     const config = joysticksConfig[i];
                     window.controls[i] = {
                         index: gamepad.index,
@@ -113,6 +115,7 @@
                         btnNum: config.btnNum,
                         lastVal: null
                     }
+
                     document.querySelector('#sel-' + i).innerText = gamepad.index + ',' + ((window.controls[i].axisNum !== undefined && window.controls[i].axisNum !== null) ? (window.controls[i].axisNum + 1) : (window.controls[i].btnNum + 1));
                 }
             }
@@ -177,14 +180,6 @@
                 document.querySelector('#joysticks-button-' + gamepad.index + '-' + a).innerText = Boolean(gamepad.buttons[a].value);
 
                 // call infinite flight
-                if (controls.brakes && controls.brakes.index == gamepad.index && controls.brakes.btnNum == a) {
-                    if (controls.brakes.lastVal !== gamepad.buttons[a].value && gamepad.buttons[a].value) {
-                        ipc.send('sendCmd', {
-                            type: 'brakes'
-                        })
-                    }
-                    controls.brakes.lastVal = gamepad.buttons[a].value;
-                }
                 if (controls.parkingbrakes && controls.parkingbrakes.index == gamepad.index && controls.parkingbrakes.btnNum == a) {
                     if (controls.parkingbrakes.lastVal !== gamepad.buttons[a].value && gamepad.buttons[a].value) {
                         ipc.send('sendCmd', {

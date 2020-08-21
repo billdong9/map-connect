@@ -97,9 +97,6 @@ ipcMain.on('sendCmd', (sys, msg) => {
                 }])
                 break;
 
-            case 'brakes':
-                connection.sendCmd('Commands.Brakes', []);
-                break;
             case 'parkingbrakes':
                 connection.sendCmd('Commands.ParkingBrakes', []);
                 break;
