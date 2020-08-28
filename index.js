@@ -318,15 +318,21 @@ function createWindow() {
     // win.webContents.openDevTools();
 
     connection.init(() => {
-        console.log('connected');
         win.webContents.executeJavaScript(`document.querySelector('#connection-status').innerText = 'Connected'`);
     }, () => {
-        console.log('connect failed');
         win.webContents.executeJavaScript(`document.querySelector('#connection-status').innerText = 'Connect failed'`);
     }, () => {
         win.webContents.executeJavaScript(`document.querySelector('#connection-status').innerText = 'The connection is invalid, please reload the connection'`);
     })
+
+    global.win = win;
 }
+
+process.on('uncaughtException', function(err) {
+    if (err.errno === 'EADDRINUSE') {
+        win.webContents.executeJavaScript(`document.querySelector('#connection-status').innerHTML = 'Port 10111 is already occupied by other applications. <br><small> Solutions: <ol><li>Close other applications that occupy port 10111 (for example: Live Connect)</li><li>Make sure you only open one Map Connect process</li></ol>and then reload the connection</small>'`);
+    }
+});
 
 app.whenReady().then(createWindow);
 

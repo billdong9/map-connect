@@ -7,8 +7,15 @@ exports.init = function(success, error, end) {
         var s = dgram.createSocket('udp4');
         s.on('message', function(msg, rinfo) {
             var response = JSON.parse(msg.toString());
-            if (response.Addresses[1] && response.Port) {
-                _addr = response.Addresses[1];
+            if (response.Addresses != null && response.Port != null) {
+                _addr = null;
+                for (i = 0; i < response.Addresses.length; i++) {
+                    const regexp = new RegExp('(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)');
+                    if (response.Addresses[i].match(regexp) != null) {
+                        _addr = response.Addresses[i];
+                        break;
+                    }
+                }
                 _port = 10111;
                 s.close();
                 client = new net.Socket();
